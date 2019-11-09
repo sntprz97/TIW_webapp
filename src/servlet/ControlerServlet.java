@@ -2,20 +2,26 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import login.Login;
+import signUp.SignUp;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet("/ControlerServlet")
+@WebServlet({"/ControlerServlet", "/signUp.html"})
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	@Resource (name="TIWDS") //Using Inyection
+	DataSource ds;   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,7 +45,7 @@ public class ControlerServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String sReq;
 		sReq = request.getServletPath();
-		System.out.println(sReq);
+		System.out.println(sReq + "Bbb");
 	}
 
 	/**
@@ -50,6 +56,19 @@ public class ControlerServlet extends HttpServlet {
 		//doGet(request, response);
 		String sReq;
 	    sReq = request.getServletPath();
+	    
+	    System.out.println(sReq);
+	   
+		if (sReq.compareTo("/signUp.html")==0){
+	    	SignUp s = new SignUp();
+	    	s.doPost(request, response);
+	    }
+		if (sReq.compareTo("/login.html")==0){
+	    	Login l= new Login();
+	    	l.doPost(request, response);
+	    	
+	    	
+	    }
 	}
 
 }

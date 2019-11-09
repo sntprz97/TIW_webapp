@@ -30,22 +30,23 @@ public class Login {
 
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String correo= request.getParameter("email");
 		String contrasena= request.getParameter("contrasena");
-		String correo= request.getParameter("mail");
-		System.out.println("Login.java");
+		
 		try {
 
 
-			/* Using JNDI lookup
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("TIWDS");
-			*/
+			Connection con = ds.getConnection();
+			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
 			
-			Connection con = null;
+			//Connection con = null;
 			//con = ds.getConnection();
-			con = DriverManager.getConnection("jdbc:mysql://:3306/usersdb", "root", "root");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb", "root", "root");
 			//Connection con = ds.getConnection();
 			
 			
@@ -70,11 +71,11 @@ public class Login {
 						
 					if(rs.getString("contrasena").compareTo(contrasena)==0){
 						
-					    	sesion.setAttribute("Usuario", rs.getString("idUsuario"));
+					    	sesion.setAttribute("Usuario", rs.getString("username"));
 					    	sesion.setAttribute("error", null);
 						
 					}else{
-						sesion.setAttribute("error", "contraseña");
+						sesion.setAttribute("error", "contrasena");
 						
 					}
 					
@@ -103,10 +104,9 @@ public class Login {
 		
     	String viewURL = "index.jsp";
     	
-		System.out.println(correo);
+		//System.out.println(correo);
 		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}
 		
 }
-
