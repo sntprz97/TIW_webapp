@@ -17,7 +17,7 @@ import signUp.SignUp;
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html"})
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource (name="TIWDS") //Using Inyection
@@ -45,7 +45,6 @@ public class ControlerServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String sReq;
 		sReq = request.getServletPath();
-		System.out.println(sReq + "Bbb");
 	}
 
 	/**
@@ -56,8 +55,6 @@ public class ControlerServlet extends HttpServlet {
 		//doGet(request, response);
 		String sReq;
 	    sReq = request.getServletPath();
-	    
-	    System.out.println(sReq);
 	   
 		if (sReq.compareTo("/signUp.html")==0){
 	    	SignUp s = new SignUp();

@@ -26,9 +26,9 @@
 		<h1>Inicia sesión</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="index.jsp" method="post">
-					<input class="text email" type="email" name="email" placeholder="Email" required=""><br>
-					<input class="text" type="password" name="password" placeholder="Contraseña" required="">
+				<form action="login.html" method="post">
+					<input class="text email" type="email" name="email" placeholder="Email" required><br>
+					<input class="text" type="password" name="password" placeholder="Contraseña" required>
 					<input type="submit" value="Entrar">
 				</form>
 				<p>¿Aún no tienes cuenta? <a href="signUp.jsp">¡Regístrate!</a></p>	

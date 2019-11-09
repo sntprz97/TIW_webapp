@@ -31,28 +31,25 @@ public class SignUp {
 		String correo = request.getParameter("email");
 		String contrasena = request.getParameter("password");
 		
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("Empezamos");
 		try {
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
 			Connection con = null;
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb", "root", "root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			System.out.println("Successful connection");
 			
 			if(con == null) {
-				out.println("--->Unable to connect to the server: " + servername);
+				System.out.println("--->Unable to connect to the server: " + servername);
 			} else {
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("select * from USUARIO where email='"+ correo+"'");
-				out.print("haceprimeraquery"); //Para probar
+				//System.out.print("haceprimeraquery"); //Para probar
 				
 				while (rs.next()){
 					empty = false;
 					sesion.setAttribute("error", "cuentaExiste");
-					out.println("llega"); //Prueba
+					//System.out.println("llega"); //Prueba
 				}	
 				if(empty == true){
 					rs = st.executeQuery("select idUsuario from USUARIO");
@@ -67,13 +64,9 @@ public class SignUp {
 				
 					rs.close();
 					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"');";
-					st.executeQuery(sql);
+					//st.executeQuery(sql);
 					st.executeUpdate(sql);
 					sesion.setAttribute("Usuario", pos);
-					
-					String sql2 = "SELECT * FROM `USUARIO`";
-					st.executeQuery(sql2);
-					st.executeUpdate(sql2);
 					
 					st.close();
 					con.close();
@@ -86,8 +79,6 @@ public class SignUp {
 		}
 		
 		String viewURL = "index.jsp";
-    	
-		//System.out.println(correo);
 		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}

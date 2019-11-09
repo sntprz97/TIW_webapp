@@ -22,7 +22,6 @@ import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import java.util.Iterator;
 
-
 public class Login {
 	@Resource (name="TIWDS") //Using Inyection
 	DataSource ds;
@@ -32,21 +31,19 @@ public class Login {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String correo= request.getParameter("email");
-		String contrasena= request.getParameter("contrasena");
+		String contrasena= request.getParameter("password");
 		
 		try {
 
-
-			Context ctx = new InitialContext();
+			/*Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("TIWDS");
-			Connection con = ds.getConnection();
+			Connection con = ds.getConnection();*/
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
 			
-			//Connection con = null;
-			//con = ds.getConnection();
-			//con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb", "root", "root");
+			Connection con = null;
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			//Connection con = ds.getConnection();
 			
 			
@@ -61,50 +58,40 @@ public class Login {
 				ResultSet rs = st.executeQuery("select * from USUARIO where email='"+ correo+"'");
 				
 			// 5.- Iterate through the ResultSet obtained and add to the html page the id, name and surname of the users
-				
-			
 					
 				while (rs.next()){
 					empty=false;
 					
-					if(rs.first()!=false){
-						
-					if(rs.getString("contrasena").compareTo(contrasena)==0){
-						
+					if(rs.first()!=false){	
+						if(rs.getString("contrasena").compareTo(contrasena)==0){
 					    	sesion.setAttribute("Usuario", rs.getString("username"));
-					    	sesion.setAttribute("error", null);
-						
-					}else{
-						sesion.setAttribute("error", "contrasena");
-						
+					    	sesion.setAttribute("error", null);	
+						}else{
+							sesion.setAttribute("error", "contrasena");
+						}
 					}
-					
-				}}
-				if(empty==true){
-					
-						
-						sesion.setAttribute("error", "cuenta");
-						
-					}
-				rs.close();
+				}
 				
+				if(empty==true){
+						sesion.setAttribute("error", "cuenta");
+						System.out.println("No existe esta cuenta");
+				}
+				
+				rs.close();
 				
 			// 6.- Close the statemente and the connection
 				st.close();
 				con.close();
 				
 			}
+			
 		} catch (Exception e) {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			System.out.println(errors.toString());
 		}
-
-		 
 		
     	String viewURL = "index.jsp";
-    	
-		//System.out.println(correo);
 		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}
