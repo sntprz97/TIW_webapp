@@ -37,7 +37,7 @@ public class SignUp {
 			HttpSession sesion = request.getSession();
 			Connection con = null;
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
-			System.out.println("Successful connection");
+			//System.out.println("Successful connection");
 			
 			if(con == null) {
 				System.out.println("--->Unable to connect to the server: " + servername);
@@ -55,18 +55,19 @@ public class SignUp {
 					rs = st.executeQuery("select idUsuario from USUARIO");
 					int pos = 1;
 					while(rs.next()){
-						System.out.println(rs.getInt("idUsuario"));
+						//System.out.println(rs.getInt("idUsuario"));
 						if(rs.getInt("idUsuario") >= pos){
 							System.out.println(pos);
 							pos = rs.getInt("idUsuario") + 1;
-						}
+						}	
 					}
 				
 					rs.close();
-					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"');";
+					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"C/ Frontera, 4"+"');";
 					//st.executeQuery(sql);
 					st.executeUpdate(sql);
-					sesion.setAttribute("Usuario", pos);
+					sesion.setAttribute("Usuario", correo);
+					sesion.setAttribute("NombreUsuario", nombre);
 					
 					st.close();
 					con.close();
@@ -78,7 +79,7 @@ public class SignUp {
 			System.out.println(errors.toString());
 		}
 		
-		String viewURL = "index.jsp";
+		String viewURL = "index2.jsp";
 		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}

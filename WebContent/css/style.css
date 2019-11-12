@@ -67,9 +67,10 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #30323A;
-  margin: 0 0 10px;
-  font-weight: 700;
+  color: #5a5a5a;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-weight: 400;
+  margin: 0 0 30px 0;
 }
 
 a {
@@ -196,6 +197,14 @@ textarea.input {
 
 .input-checkbox input[type="checkbox"]:checked+label+.caption, .input-checkbox input[type="radio"]:checked+label+.caption {
   max-height: 800px;
+}
+
+.fh5co-tours{
+  padding: 7em 0;
+}
+
+.fh5co-section-gray {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /*----------------------------*\
@@ -333,6 +342,12 @@ textarea.input {
 .header-top-links>li>a {
   cursor: pointer;
   text-transform: uppercase;
+}
+
+.heading-title {
+  font-size: 40px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
 
 /*----------------------------*\

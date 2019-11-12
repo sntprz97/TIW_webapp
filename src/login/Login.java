@@ -64,7 +64,8 @@ public class Login {
 					
 					if(rs.first()!=false){	
 						if(rs.getString("contrasena").compareTo(contrasena)==0){
-					    	sesion.setAttribute("Usuario", rs.getString("username"));
+					    	sesion.setAttribute("Usuario", rs.getString("email"));
+					    	sesion.setAttribute("NombreUsuario", rs.getString("nombre"));
 					    	sesion.setAttribute("error", null);	
 						}else{
 							sesion.setAttribute("error", "contrasena");
@@ -75,6 +76,7 @@ public class Login {
 				if(empty==true){
 						sesion.setAttribute("error", "cuenta");
 						System.out.println("No existe esta cuenta");
+						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				
 				rs.close();
@@ -91,7 +93,7 @@ public class Login {
 			System.out.println(errors.toString());
 		}
 		
-    	String viewURL = "index.jsp";
+    	String viewURL = "index2.jsp";
 		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}

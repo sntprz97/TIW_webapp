@@ -1,23 +1,32 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import cerrarSesion.CerrarSesion;
 import login.Login;
+import perfil.CambiarPerfil;
+import perfil.BorrarCuenta;
+import perfil.Perfil;
 import signUp.SignUp;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html"})
+@MultipartConfig
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource (name="TIWDS") //Using Inyection
@@ -45,6 +54,17 @@ public class ControlerServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		String sReq;
 		sReq = request.getServletPath();
+		
+		if (sReq.compareTo("/profile.html")==0){
+	    	Perfil p= new Perfil();
+	    	p.doGet(request, response);
+	    }
+		
+		if (sReq.compareTo("/cerrarSesion.html")==0){
+	    	CerrarSesion c= new CerrarSesion();
+	    	c.doGet(request, response);
+		}
+		
 	}
 
 	/**
@@ -60,11 +80,20 @@ public class ControlerServlet extends HttpServlet {
 	    	SignUp s = new SignUp();
 	    	s.doPost(request, response);
 	    }
+		
 		if (sReq.compareTo("/login.html")==0){
-	    	Login l= new Login();
-	    	l.doPost(request, response);
-	    	
-	    	
+	    	Login l = new Login();
+	    	l.doPost(request, response);	
+	    }
+		
+		if (sReq.compareTo("/borrarCuenta.html")==0){
+	    	BorrarCuenta m = new BorrarCuenta();
+	    	m.doPost(request, response);	
+	    }
+		
+		if (sReq.compareTo("/cambiarPerfil.html")==0){
+	    	CambiarPerfil m = new CambiarPerfil();
+	    	m.doPost(request, response);
 	    }
 	}
 

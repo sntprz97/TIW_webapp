@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -173,14 +173,62 @@
 	</header>
 	<!-- /HEADER -->
 	<img class="dashboard" src="./img/dashboard.png" alt="">
-	<div class="content-header">
-		<h1>Santiago Perez Medina</h1>
-		<button>Editar Mi Perfil</button>
-	</div>
-	<div class="content">
-		<div class="user-content">
-			
+	<% HttpSession sesion = request.getSession();
+	if(sesion.getAttribute("Usuario")!= null){ %>
+	<div id="fh5co-tours" class="fh5co-section-gray">
+			<div class="container"> 
+				<div class="row">
+					<div class="col-md-12 animate-box">
+						<h2 class="heading-title">Perfil</h2>
+					</div>
+					<div class="col-md-6 animate-box">
+						<form action="cambiarPerfil.html" method="post" enctype="multipart/form-data">
+                        <table class="table">
+                            <tbody> 
+                                <tr>                                
+                                    <td>Nombre:</td>
+                                    <td><input name="nombre" type="text" value="${perfilA}" required></td>
+                                </tr> 
+                                <tr>                                
+                                    <td>Apellido:</td>
+                                    <td><input name="apellido" type="text" value="${perfilB}" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><span class="email"><c:out value="${perfilC}"/></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Nombre de usuario:</td>
+                                    <td><input name="username" type="text" value="${perfilD}" required></td>
+                                </tr>
+                                <tr>
+                                    <td>Dirección:</td>
+                                    <td><input name="direccion" type="text" value="${perfilE}" required></td>
+                                </tr>
+                                <tr>
+      								<td><input type="submit" value="Guardar cambios" required><br></td>
+								</tr>                            
+                            </tbody>
+                        </table>
+                        </form>                                             
+                    </div>
+					<div class="col-md-6 animate-box">
+						<table class="table">
+                            <tbody>        
+                                <tr>
+                                    <th scope="row" ><a href="cerrarSesion.html" id="CerrarSesion">Cerrar Sesión</a></th>   
+                                </tr>
+                                <tr>
+                                    <th scope="row" ><a href=# id="BorrarCuenta">Borrar Cuenta</a></th>   
+                                </tr>                            
+                            </tbody>
+                        </table>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
+	<%}else{ %>
+		<h1> Para visitar su perfil, antes debe <a href="signUp.jsp" id="Registro">registrarse</a> o <a href="login.jsp" id="Registro">iniciar sesión</a></h1>
+  <%} %>
 </body>
 </html>
