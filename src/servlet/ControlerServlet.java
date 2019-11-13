@@ -65,6 +65,11 @@ public class ControlerServlet extends HttpServlet {
 	    	c.doGet(request, response);
 		}
 		
+		if (sReq.compareTo("/borrarCuenta.html")==0){
+	    	BorrarCuenta m = new BorrarCuenta();
+	    	m.doGet(request, response);	
+	    }
+		
 	}
 
 	/**
@@ -84,11 +89,6 @@ public class ControlerServlet extends HttpServlet {
 		if (sReq.compareTo("/login.html")==0){
 	    	Login l = new Login();
 	    	l.doPost(request, response);	
-	    }
-		
-		if (sReq.compareTo("/borrarCuenta.html")==0){
-	    	BorrarCuenta m = new BorrarCuenta();
-	    	m.doPost(request, response);	
 	    }
 		
 		if (sReq.compareTo("/cambiarPerfil.html")==0){

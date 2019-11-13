@@ -29,6 +29,7 @@
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
 	<link type="text/css" rel="stylesheet" href="css/profile.css" />
+
 </head>
 <body>
 	<!-- HEADER -->
@@ -110,7 +111,6 @@
 								<li><a href="checkout.html"><i class="fa fa-check"></i> Checkout</a></li>
 								<li><a href="login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="signUp.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-								<li><a href="#"><i class="fa fa-times-circle"></i> Unsubscribe</a></li>
 							</ul>
 						</li>
 						<!-- /Account -->
@@ -216,10 +216,10 @@
 						<table class="table">
                             <tbody>        
                                 <tr>
-                                    <th scope="row" ><a href="cerrarSesion.html" id="CerrarSesion">Cerrar Sesión</a></th>   
+                                    <th scope="row" ><a href="cerrarSesion.html">Cerrar Sesión</a></th>   
                                 </tr>
                                 <tr>
-                                    <th scope="row" ><a href=# id="BorrarCuenta">Borrar Cuenta</a></th>   
+                                    <th scope="row" ><button onclick="displayPopup()" >Borrar Cuenta</button></th>   
                                 </tr>                            
                             </tbody>
                         </table>
@@ -229,6 +229,19 @@
 		</div>
 	<%}else{ %>
 		<h1> Para visitar su perfil, antes debe <a href="signUp.jsp" id="Registro">registrarse</a> o <a href="login.jsp" id="Registro">iniciar sesión</a></h1>
-  <%} %>
+  	<%} %>
+  	<div class="cd-popup" role="alert" id="showpopup">
+		<div class="cd-popup-container">
+			<p>¿Está segur@ de que quiere darse de baja de la aplicación?</p>
+				<ul class="cd-buttons">
+					<li><form id="borrar-cuenta" method="get" action="borrarCuenta.html"><a onclick="document.getElementById('borrar-cuenta').submit()">Sí</a></form></li>
+					<li><a onclick="hidePopup()">No</a></li>
+				</ul>
+			<a href="profile.jsp" class="cd-popup-close img-replace" onclick="hidePopup()">Cerrar</a>
+		</div> <!-- cd-popup-container -->
+	</div> <!-- cd-popup -->
+	
+	<!-- jQuery -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script src="js/script.js"></script>
 </body>
 </html>
