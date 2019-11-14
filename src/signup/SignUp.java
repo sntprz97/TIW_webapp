@@ -57,14 +57,12 @@ public class SignUp {
 					while(rs.next()){
 						//System.out.println(rs.getInt("idUsuario"));
 						if(rs.getInt("idUsuario") >= pos){
-							System.out.println(pos);
 							pos = rs.getInt("idUsuario") + 1;
 						}	
 					}
 				
 					rs.close();
-					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"C/ Frontera, 4"+"');";
-					//st.executeQuery(sql);
+					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
 					st.executeUpdate(sql);
 					sesion.setAttribute("Usuario", correo);
 					sesion.setAttribute("NombreUsuario", nombre);

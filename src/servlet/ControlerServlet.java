@@ -1,10 +1,9 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.annotation.Resource;
-import javax.naming.NamingException;
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,20 +11,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import cerrarSesion.CerrarSesion;
 import login.Login;
-import perfil.CambiarPerfil;
 import perfil.BorrarCuenta;
+import perfil.CambiarPerfil;
 import perfil.Perfil;
+import products.AddProduct;
+import products.GetProductsPreview;
 import signUp.SignUp;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProductsPreview", "/addProduct"})
 @MultipartConfig
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -56,17 +56,22 @@ public class ControlerServlet extends HttpServlet {
 		sReq = request.getServletPath();
 		
 		if (sReq.compareTo("/profile.html")==0){
-	    	Perfil p= new Perfil();
+	    	Perfil p = new Perfil();
 	    	p.doGet(request, response);
 	    }
 		
 		if (sReq.compareTo("/cerrarSesion.html")==0){
-	    	CerrarSesion c= new CerrarSesion();
+	    	CerrarSesion c = new CerrarSesion();
 	    	c.doGet(request, response);
 		}
 		
 		if (sReq.compareTo("/borrarCuenta.html")==0){
 	    	BorrarCuenta m = new BorrarCuenta();
+	    	m.doGet(request, response);	
+	    }
+
+		if (sReq.compareTo("/getProductsPreview")==0){
+			GetProductsPreview m = new GetProductsPreview();
 	    	m.doGet(request, response);	
 	    }
 		
@@ -95,6 +100,12 @@ public class ControlerServlet extends HttpServlet {
 	    	CambiarPerfil m = new CambiarPerfil();
 	    	m.doPost(request, response);
 	    }
+		
+		if (sReq.compareTo("/addProduct")==0){
+	    	AddProduct a = new AddProduct();
+	    	a.doPost(request, response);
+	    }
+		
 	}
 
 }

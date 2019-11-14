@@ -21,6 +21,20 @@
 		<div class="main-agileinfo">
 			<div class="agileits-top">
 				<form action="signUp.html" method="POST">
+					<div class="wthree-text">
+						<label class="anim">
+							<input type="checkbox" class="checkbox">
+							<span>Soy un cliente</span>
+						</label>
+						<div class="clear"> </div>
+					</div>
+					<div class="wthree-text">
+						<label class="anim">
+							<input type="checkbox" class="checkbox">
+							<span>Soy un vendedor</span>
+						</label>
+						<div class="clear"> </div>
+					</div>
 					<input class="text email" type="text" name="name" placeholder="Nombre" required value="b">
 					<input class="text email" type="text" name="surname" placeholder="Apellido" required value="b">
 					<input class="text" type="text" name="username" placeholder="Usuario" required value="b">

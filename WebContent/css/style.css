@@ -64,6 +64,7 @@ body {
   font-family: 'Hind', sans-serif;
   color: #4A4E5A;
   overflow-x: hidden;
+  height: 100vh !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -154,7 +155,7 @@ hr {
   background-color: #F8694A;
 }
 
-.primary-btn:hover, .primary-btn:focus {
+.primary-btn:hover, .primary-btn.active {
   color: #FFF;
   background-color: #30323A;
 }
