@@ -27,7 +27,7 @@ import signUp.SignUp;
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProductsPreview", "/addProduct", "/deleteProduct", "/modifyProduct"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct"})
 @MultipartConfig
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +72,7 @@ public class ControlerServlet extends HttpServlet {
 	    	m.doGet(request, response);	
 	    }
 
-		if (sReq.compareTo("/getProductsPreview")==0){
+		if (sReq.compareTo("/getProducts")==0){
 			GetProducts m = new GetProducts();
 	    	m.doGet(request, response);	
 	    }

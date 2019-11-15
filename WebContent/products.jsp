@@ -110,9 +110,9 @@
 								</div>
 								<strong class="text-uppercase">WELCOME<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase"><%= session.getAttribute("NombreUsuario") %></a>
+							<a href="#" class="text-uppercase"><%= session.getAttribute("Usuario") %></a>
 							<ul class="custom-menu">
-								<li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="seller.jsp"><i class="fa fa-user-o"></i> My Products</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>

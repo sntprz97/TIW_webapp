@@ -37,7 +37,9 @@ public class AddProduct {
 			String precio = request.getParameter("precio");
 			String cantidad = request.getParameter("cantidad");
 			String imagenProducto = request.getParameter("imagen");
-
+			
+			System.out.println(imagenProducto);
+			
 			byte[] bytes = Base64.getDecoder().decode(imagenProducto);
 			
 			String servername = "localhost";

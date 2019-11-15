@@ -59,7 +59,6 @@ public class Login {
 					Blob blob = rtProductos.getBlob("imagen");
 					byte [] bytes = blob.getBytes(1l, (int)blob.length());
 					String image = Base64.getEncoder().encodeToString(bytes);
-					
 					productos.add(new Producto(
 							rtProductos.getString("idProducto"), 
 							rtProductos.getString("nombreProducto"), 
@@ -72,8 +71,11 @@ public class Login {
 							image));
 				}
 				
+				rtProductos.close();
+				
 			// 4.- Execute the query "select * from users" 
 				ResultSet rtVendedor = st.executeQuery("SELECT * FROM VENDEDORES WHERE username='"+correo+"'");
+				
 				
 			// 5.- Iterate through the ResultSet obtained and add to the html page the id, name and surname of the users
 				
@@ -84,11 +86,13 @@ public class Login {
 						sesion.setAttribute("error", null);
 						request.setAttribute("productos", productos);
 						request.getRequestDispatcher("products.jsp").forward(request, response);
+						return;
 					}
 				}
 				
+				rtVendedor.close();
+				
 				ResultSet rtUsuario = st.executeQuery("select * from USUARIO where email='"+correo+"'");
-				System.out.println("hola");
 				
 				while(rtUsuario.next()){
 					empty=false;
@@ -100,6 +104,7 @@ public class Login {
 					    	sesion.setAttribute("error", null);
 					    	request.setAttribute("productos", productos);
 					    	request.getRequestDispatcher("index-client.jsp").forward(request, response);
+					    	return;
 
 						}else{
 							sesion.setAttribute("error", "contrasena");
@@ -113,9 +118,7 @@ public class Login {
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				
-				rtProductos.close();
 				rtUsuario.close();
-				rtVendedor.close();
 				
 				
 			// 6.- Close the statemente and the connection

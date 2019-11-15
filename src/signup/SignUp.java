@@ -26,7 +26,6 @@ public class SignUp {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		boolean checkbox = request.getParameterValues("seller-check") != null;
-		System.out.println(checkbox);
 		String nombre = request.getParameter("name");
 		String apellido = request.getParameter("surname");
 		String usuario = request.getParameter("username");
@@ -64,6 +63,8 @@ public class SignUp {
 						String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
 						st.executeUpdate(sql);
 						
+						sesion.setAttribute("Usuario", correo);
+						sesion.setAttribute("NombreUsuario", nombre);
 						request.getRequestDispatcher("index-client.jsp").forward(request, response);
 					} else {
 						String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
@@ -79,11 +80,10 @@ public class SignUp {
 						String sql2 = "INSERT INTO `VENDEDORES` VALUES ('"+position+"', '"+correo+"');";
 						st.executeUpdate(sql2);
 						
-						request.getRequestDispatcher("seller.jsp").forward(request, response);
+						sesion.setAttribute("Usuario", correo);
+						sesion.setAttribute("NombreUsuario", nombre);
+						request.getRequestDispatcher("products.jsp").forward(request, response);
 					}
-					
-					sesion.setAttribute("Usuario", correo);
-					sesion.setAttribute("NombreUsuario", nombre);
 					
 					st.close();
 					con.close();
