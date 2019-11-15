@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -40,8 +41,8 @@ public class AddProduct {
 			byte[] bytes = Base64.getDecoder().decode(imagenProducto);
 			
 			String servername = "localhost";
-			//HttpSession sesion = request.getSession();
-			//String id = sesion.getAttribute("Usuario").toString();
+			HttpSession sesion = request.getSession();
+			String id = sesion.getAttribute("Usuario").toString();
 			Connection con = null;
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			
@@ -60,9 +61,10 @@ public class AddProduct {
 					}
 				
 					rs.close();
-					PreparedStatement pst = con.prepareStatement("INSERT INTO `PRODUCTOS` VALUES ('"+pos+"', '"+nombreProducto+"', '"+marca+"', '"+talla+"', '"+descripcion+"', '"+precio+"', '" + cantidad +"', '"+"b@gmail.com"+"', (?));");
+					PreparedStatement pst = con.prepareStatement("INSERT INTO `PRODUCTOS` VALUES ('"+pos+"', '"+nombreProducto+"', '"+marca+"', '"+talla+"', '"+descripcion+"', '"+precio+"', '" + cantidad +"', '"+id+"', (?));");
 					pst.setBlob(1, new ByteArrayInputStream(bytes),bytes.length);
 					pst.executeUpdate();
+					sesion.setAttribute("Position", pos);
 					
 					st.close();
 					con.close();
@@ -77,7 +79,7 @@ public class AddProduct {
 			System.out.println(errors.toString());
 		}
 		
-		request.getRequestDispatcher("products.jsp").forward(request, response);
+		request.getRequestDispatcher("seller.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
 		return;
 	}	
 }

@@ -19,13 +19,15 @@ import perfil.BorrarCuenta;
 import perfil.CambiarPerfil;
 import perfil.Perfil;
 import products.AddProduct;
-import products.GetProductsPreview;
+import products.DeleteProduct;
+import products.GetProducts;
+import products.ModifyProduct;
 import signUp.SignUp;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProductsPreview", "/addProduct"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProductsPreview", "/addProduct", "/deleteProduct", "/modifyProduct"})
 @MultipartConfig
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -71,8 +73,13 @@ public class ControlerServlet extends HttpServlet {
 	    }
 
 		if (sReq.compareTo("/getProductsPreview")==0){
-			GetProductsPreview m = new GetProductsPreview();
+			GetProducts m = new GetProducts();
 	    	m.doGet(request, response);	
+	    }
+		
+		if (sReq.compareTo("/deleteProduct")==0){
+	    	DeleteProduct d = new DeleteProduct();
+	    	d.doGet(request, response);	
 	    }
 		
 	}
@@ -104,6 +111,11 @@ public class ControlerServlet extends HttpServlet {
 		if (sReq.compareTo("/addProduct")==0){
 	    	AddProduct a = new AddProduct();
 	    	a.doPost(request, response);
+	    }
+		
+		if (sReq.compareTo("/modifyProduct")==0){
+	    	ModifyProduct m = new ModifyProduct();
+	    	m.doPost(request, response);
 	    }
 		
 	}

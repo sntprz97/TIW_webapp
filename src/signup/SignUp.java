@@ -25,6 +25,8 @@ public class SignUp {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		boolean checkbox = request.getParameterValues("seller-check") != null;
+		System.out.println(checkbox);
 		String nombre = request.getParameter("name");
 		String apellido = request.getParameter("surname");
 		String usuario = request.getParameter("username");
@@ -44,26 +46,42 @@ public class SignUp {
 			} else {
 				Statement st = con.createStatement();
 				ResultSet rs = st.executeQuery("select * from USUARIO where email='"+ correo+"'");
-				//System.out.print("haceprimeraquery"); //Para probar
 				
 				while (rs.next()){
 					empty = false;
 					sesion.setAttribute("error", "cuentaExiste");
-					//System.out.println("llega"); //Prueba
 				}	
 				if(empty == true){
 					rs = st.executeQuery("select idUsuario from USUARIO");
 					int pos = 1;
 					while(rs.next()){
-						//System.out.println(rs.getInt("idUsuario"));
 						if(rs.getInt("idUsuario") >= pos){
 							pos = rs.getInt("idUsuario") + 1;
 						}	
 					}
-				
 					rs.close();
-					String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
-					st.executeUpdate(sql);
+					if(checkbox == false) {
+						String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
+						st.executeUpdate(sql);
+						
+						request.getRequestDispatcher("index-client.jsp").forward(request, response);
+					} else {
+						String sql = "INSERT INTO `USUARIO` (`idUsuario`, `nombre`, `apellido1`, `username`, `email`, `contrasena`, `direccion`) VALUES ('"+pos+"', '"+nombre+"', '"+apellido+"', '"+usuario+"', '"+correo+"', '"+contrasena+"', '"+"null"+"');";
+						st.executeUpdate(sql);
+						ResultSet rt = st.executeQuery("select idUsuario from VENDEDORES");
+						int position = 1;
+						while(rt.next()){
+							if(rt.getInt("idUsuario") >= position){
+								position = rt.getInt("idUsuario") + 1;
+							}	
+						}
+						rt.close();
+						String sql2 = "INSERT INTO `VENDEDORES` VALUES ('"+position+"', '"+correo+"');";
+						st.executeUpdate(sql2);
+						
+						request.getRequestDispatcher("seller.jsp").forward(request, response);
+					}
+					
 					sesion.setAttribute("Usuario", correo);
 					sesion.setAttribute("NombreUsuario", nombre);
 					
@@ -76,9 +94,7 @@ public class SignUp {
 			e.printStackTrace(new PrintWriter(errors));
 			System.out.println(errors.toString());
 		}
-		
-		String viewURL = "index2.jsp";
-		request.getRequestDispatcher(viewURL).forward(request, response);
+
 		return;
 	}
 }

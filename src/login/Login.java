@@ -1,26 +1,24 @@
 package login;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Base64;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.naming.Context;
+import javax.sql.DataSource;
 
-import javax.naming.InitialContext;
-import javax.servlet.ServletContext;
-import java.util.Iterator;
+import products.Producto;
 
 public class Login {
 	@Resource (name="TIWDS") //Using Inyection
@@ -30,8 +28,8 @@ public class Login {
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String correo= request.getParameter("email");
-		String contrasena= request.getParameter("password");
+		String correo = request.getParameter("email");
+		String contrasena = request.getParameter("password");
 		
 		try {
 
@@ -54,19 +52,55 @@ public class Login {
 			// 3- Obtain an Statement object -> st
 				Statement st = con.createStatement();
 				
+				ResultSet rtProductos = st.executeQuery("select * from PRODUCTOS");
+				ArrayList<Producto> productos = new ArrayList<>();
+				
+				while(rtProductos.next()) {
+					Blob blob = rtProductos.getBlob("imagen");
+					byte [] bytes = blob.getBytes(1l, (int)blob.length());
+					String image = Base64.getEncoder().encodeToString(bytes);
+					
+					productos.add(new Producto(
+							rtProductos.getString("idProducto"), 
+							rtProductos.getString("nombreProducto"), 
+							rtProductos.getString("marca"), 
+							rtProductos.getString("talla"), 
+							rtProductos.getString("descripcionBreve"), 
+							rtProductos.getFloat("precio"), 
+							rtProductos.getInt("cantidad"), 
+							rtProductos.getString("idUsuario"), 
+							image));
+				}
+				
 			// 4.- Execute the query "select * from users" 
-				ResultSet rs = st.executeQuery("select * from USUARIO where email='"+ correo+"'");
+				ResultSet rtVendedor = st.executeQuery("SELECT * FROM VENDEDORES WHERE username='"+correo+"'");
 				
 			// 5.- Iterate through the ResultSet obtained and add to the html page the id, name and surname of the users
-					
-				while (rs.next()){
+				
+				while(rtVendedor.next()) {
+					empty = false;
+					if(rtVendedor.first()!=false) {
+						sesion.setAttribute("Usuario", rtVendedor.getString("username"));
+						sesion.setAttribute("error", null);
+						request.setAttribute("productos", productos);
+						request.getRequestDispatcher("products.jsp").forward(request, response);
+					}
+				}
+				
+				ResultSet rtUsuario = st.executeQuery("select * from USUARIO where email='"+correo+"'");
+				System.out.println("hola");
+				
+				while(rtUsuario.next()){
 					empty=false;
 					
-					if(rs.first()!=false){	
-						if(rs.getString("contrasena").compareTo(contrasena)==0){
-					    	sesion.setAttribute("Usuario", rs.getString("email"));
-					    	sesion.setAttribute("NombreUsuario", rs.getString("nombre"));
-					    	sesion.setAttribute("error", null);	
+					if(rtUsuario.first()!=false){
+						if(rtUsuario.getString("contrasena").compareTo(contrasena)==0){
+					    	sesion.setAttribute("Usuario", rtUsuario.getString("email"));
+					    	sesion.setAttribute("NombreUsuario", rtUsuario.getString("nombre"));
+					    	sesion.setAttribute("error", null);
+					    	request.setAttribute("productos", productos);
+					    	request.getRequestDispatcher("index-client.jsp").forward(request, response);
+
 						}else{
 							sesion.setAttribute("error", "contrasena");
 						}
@@ -79,7 +113,10 @@ public class Login {
 						request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				
-				rs.close();
+				rtProductos.close();
+				rtUsuario.close();
+				rtVendedor.close();
+				
 				
 			// 6.- Close the statemente and the connection
 				st.close();
@@ -93,8 +130,6 @@ public class Login {
 			System.out.println(errors.toString());
 		}
 		
-    	String viewURL = "index2.jsp";
-		request.getRequestDispatcher(viewURL).forward(request, response);
 		return;
 	}
 		

@@ -23,14 +23,7 @@
 				<form action="signUp.html" method="POST">
 					<div class="wthree-text">
 						<label class="anim">
-							<input type="checkbox" class="checkbox">
-							<span>Soy un cliente</span>
-						</label>
-						<div class="clear"> </div>
-					</div>
-					<div class="wthree-text">
-						<label class="anim">
-							<input type="checkbox" class="checkbox">
+							<input type="checkbox" class="checkbox" name="seller-check">
 							<span>Soy un vendedor</span>
 						</label>
 						<div class="clear"> </div>

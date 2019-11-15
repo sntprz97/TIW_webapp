@@ -9,47 +9,46 @@ import java.sql.Statement;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-@MultipartConfig
-public class CambiarPerfil {
-
+public class CambiarNombre {
+	
 	@Resource (name="TIWDS") //Using Inyection
 	DataSource ds;
 	boolean empty=true;
-	
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String newNombre = request.getParameter("CambioNombre");
 		
 		try {
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
 			String id = sesion.getAttribute("Usuario").toString();
+			System.out.println(id);
 			Connection con = null;
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			
-			if (con==null){
-				
+			if (con == null){
 				System.out.println("--->UNABLE TO CONNECT TO SERVER:" + servername);
+			} else {
 				
-			}else {
+			// 3- Obtain an Statement object -> st and execute update query
 				
 				Statement st = con.createStatement();
-				
-				st.executeUpdate("UPDATE USUARIO SET nombre='"+request.getParameter("nombre")+"' WHERE email='"+id+"'");
-				st.executeUpdate("UPDATE USUARIO SET apellido1='"+request.getParameter("apellido")+"' WHERE email='"+id+"'");	
-				st.executeUpdate("UPDATE USUARIO SET username='"+request.getParameter("username")+"' WHERE email='"+id+"'");
-				st.executeUpdate("UPDATE USUARIO SET direccion='"+request.getParameter("direccion")+"' WHERE email='"+id+"'");
+				st.executeUpdate("UPDATE USUARIO SET nombre='"+newNombre+"' WHERE username='"+id+"'");
+			
+			// 4- Close statement and connection	
 				
 				st.close();
 				con.close();
-			}
+			}	
 			
-		}catch (Exception e) {
+		} catch (Exception e) {
 			StringWriter errors = new StringWriter();
 			e.printStackTrace(new PrintWriter(errors));
 			System.out.println(errors.toString());
@@ -57,7 +56,9 @@ public class CambiarPerfil {
 		
 		Perfil p = new Perfil();
     	p.doGet(request, response);
+    	
+		return;
 		
-    	return;
 	}
+
 }

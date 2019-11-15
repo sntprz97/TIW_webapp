@@ -1,13 +1,16 @@
+<%@ page import="java.text.*,java.util.*"%>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP HTML Template</title>
+	<title>TIW SHOP</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -34,10 +37,8 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
 </head>
-
-<body onload="getProductsPreview()">
+<body onload="getProducts()">
 	<!-- HEADER -->
 	<header>
 		<!-- top Header -->
@@ -64,7 +65,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">USD ($)</a></li>
-								<li><a href="#">EUR (€)</a></li>
+								<li><a href="#">EUR (â¬)</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -107,11 +108,11 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+								<strong class="text-uppercase">WELCOME<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Join</a>
+							<a href="#" class="text-uppercase"><%= session.getAttribute("NombreUsuario") %></a>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
@@ -189,15 +190,15 @@
 					<span class="category-header">Categories <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women’s Clothing <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Womenâs Clothing <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -208,8 +209,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -220,8 +221,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -242,7 +243,7 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Men’s Clothing</a></li>
+						<li><a href="#">Menâs Clothing</a></li>
 						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Phones & Accessories <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
@@ -250,8 +251,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -260,8 +261,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -272,8 +273,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -282,8 +283,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -310,8 +311,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -320,8 +321,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -332,8 +333,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -342,8 +343,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -354,8 +355,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -364,8 +365,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -393,8 +394,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -405,8 +406,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -417,8 +418,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -447,7 +448,7 @@
 											<a class="banner banner-1" href="#">
 												<img src="./img/banner06.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Women’s</h3>
+													<h3 class="white-color text-uppercase">Womenâs</h3>
 												</div>
 											</a>
 											<hr>
@@ -455,8 +456,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -467,7 +468,7 @@
 											<a class="banner banner-1" href="#">
 												<img src="./img/banner07.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Men’s</h3>
+													<h3 class="white-color text-uppercase">Menâs</h3>
 												</div>
 											</a>
 										</div>
@@ -475,8 +476,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -495,8 +496,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -515,8 +516,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Womenâs Clothing</a></li>
+											<li><a href="#">Menâs Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -736,8 +737,27 @@
 					<!-- STORE -->
 					<div id="store">
 						<!-- row -->
-						<div class="row" id="products-container"></div>
-						
+						<div class="row" id="products-container">
+							<c:forEach items="${productos}" var="p">
+							<div class="col-md-4 col-sm-6 col-xs-6">
+								<div class="product product-single">
+									<div class="product-thumb">
+										<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+										<img src="data:image/png;base64,${p.getImagen()}" alt="">
+									</div>
+									<div class="product-body">
+										<h3 class="product-price">${p.getPrecio()} &#8364</h3>
+										<h2 class="product-name"><a href="#">${p.getNombreProducto()}</a></h2>
+										<div class="product-btns">
+											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+											<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							</c:forEach>
+						</div>
 					</div>
 					<!-- /store bottom filter -->
 				</div>
@@ -857,5 +877,4 @@
 	<script src="js/main.js"></script>
 
 </body>
-
 </html>

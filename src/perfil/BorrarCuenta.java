@@ -44,14 +44,11 @@ public class BorrarCuenta {
 					if(empty != false){
 						
 						st.executeUpdate("DELETE FROM USUARIO WHERE email='"+id+"'");
-						System.out.println(id);
-						System.out.println("usuario borrado");
 						st.close();
 						con.close();
 						
-						String viewURL = "profile.jsp";
 						sesion.invalidate();
-						request.getRequestDispatcher(viewURL).forward(request, response);
+						request.getRequestDispatcher("profile.jsp").forward(request, response);
 						
 					}else{
 					
