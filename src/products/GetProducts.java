@@ -43,40 +43,35 @@ public class GetProducts {
 				
 			// 4.- Execute the query "select * from users" 
 				
-				ResultSet rs = st.executeQuery("select * from PRODUCTOS");
+
+				ResultSet rtProductos = st.executeQuery("select * from PRODUCTOS");
+				ArrayList<Producto> productos = new ArrayList<>();
 				
-				ArrayList<HashMap<String, String>> productos = new ArrayList<>();
-				while(rs.next()) {
-					Blob blob = rs.getBlob("imagen");
+				while(rtProductos.next()) {
+					Blob blob = rtProductos.getBlob("imagen");
 					byte [] bytes = blob.getBytes(1l, (int)blob.length());
 					String image = Base64.getEncoder().encodeToString(bytes);
-					
-					Producto p = new Producto(
-							rs.getString("idProducto"), 
-							rs.getString("nombreProducto"), 
-							rs.getString("marca"), 
-							rs.getString("talla"), 
-							rs.getString("descripcionBreve"), 
-							rs.getFloat("precio"), 
-							rs.getInt("cantidad"), 
-							rs.getString("idUsuario"), 
-							image);
+					productos.add(new Producto(
+							rtProductos.getString("idProducto"), 
+							rtProductos.getString("nombreProducto"), 
+							rtProductos.getString("marca"), 
+							rtProductos.getString("talla"), 
+							rtProductos.getString("descripcionBreve"), 
+							rtProductos.getFloat("precio"), 
+							rtProductos.getInt("cantidad"), 
+							rtProductos.getString("idUsuario"), 
+							image));
 				}
 				
-				String res = productos.toString();
-				res = res.replace('=',':');
-				
-				rs.close();
+				rtProductos.close();
 				
 			// 6.- Close the statement and the connection
 					
 				st.close();
 				con.close();
 				
-		        PrintWriter out = response.getWriter();
-		        response.setCharacterEncoding("UTF-8");
-		        out.print(res);
-		        out.flush(); 
+		    	request.setAttribute("productos", productos);
+		    	request.getRequestDispatcher("products.jsp").forward(request, response);
 		        
 			}
 			

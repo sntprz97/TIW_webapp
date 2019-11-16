@@ -37,12 +37,10 @@ public class AddProduct {
 			String precio = request.getParameter("precio");
 			String cantidad = request.getParameter("cantidad");
 			String imagenProducto = request.getParameter("imagen");
-			System.out.println("AQUI TIENES TU BASE 64");
+			
 			System.out.println(imagenProducto);
 			
-			String base64Image = imagenProducto.substring(imagenProducto.indexOf(',')+1);
-			System.out.println(base64Image);
-			byte[] bytes = Base64.getDecoder().decode(base64Image);
+			byte[] bytes = Base64.getDecoder().decode(imagenProducto);
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
@@ -68,14 +66,9 @@ public class AddProduct {
 					PreparedStatement pst = con.prepareStatement("INSERT INTO `PRODUCTOS` VALUES ('"+pos+"', '"+nombreProducto+"', '"+marca+"', '"+talla+"', '"+descripcion+"', '"+precio+"', '" + cantidad +"', '"+id+"', (?));");
 					pst.setBlob(1, new ByteArrayInputStream(bytes),bytes.length);
 					pst.executeUpdate();
-					request.getSession().setAttribute("Position", pos);
-					request.getSession().setAttribute("NombreProducto", nombreProducto);
-					request.getSession().setAttribute("Marca", marca);
-					request.getSession().setAttribute("Talla", talla);
-					request.getSession().setAttribute("Descripcion", descripcion);
-					request.getSession().setAttribute("Precio", precio);
-					request.getSession().setAttribute("Cantidad", cantidad);
-					request.getSession().setAttribute("ImagenProducto", imagenProducto);
+					
+					GetSellerProducts gsp = new GetSellerProducts();
+					gsp.doGet(request, response);
 					
 					st.close();
 					con.close();
@@ -90,7 +83,7 @@ public class AddProduct {
 			System.out.println(errors.toString());
 		}
 		
-		request.getRequestDispatcher("products.jsp").forward(request, response);	//Cambiar en un futuro por la pï¿½gina "My products"
+		request.getRequestDispatcher("products.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
 		return;
 	}	
 }

@@ -2,6 +2,7 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +75,7 @@
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="products.jsp">
+						<a class="logo" href="getProducts">
 							<img src="./img/logo.png" alt="">
 						</a>
 					</div>
@@ -92,13 +93,8 @@
 							</div>
 							<a href="#" class="text-uppercase"><%= session.getAttribute("Usuario") %></a>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+								<li><a href="javascript:history.go(-1)"><i class="fa fa-user-o"></i> Go back</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-								<li><a href="checkout.html"><i class="fa fa-check"></i> Checkout</a></li>
-								<li><a href="login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
-								<li><a href="signUp.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-								<li><a href="#"><i class="fa fa-times-circle"></i> Unsubscribe</a></li>
 							</ul>
 						</li>
 						<!-- /Account -->
@@ -120,11 +116,11 @@
 		<div class="container"> 
 			<div class="row">
 				<div>
-					<button class="primary-btn action-btn active" id="add-button" onclick="changeTab('add')" formaction="products.jsp"><i class="fa fa-plus-square"></i>  Add product</button></form>
-					<button class="primary-btn action-btn " id="myProducts-button" onclick="changeTab('myProducts')"><i class="fa fa-book"></i>  View your products</button>
+					<button class="primary-btn action-btn active" id="myProducts-button" onclick="changeTab('myProducts')"><i class="fa fa-book"></i>  View your products</button>
+					<button class="primary-btn action-btn" id="add-button" onclick="changeTab('add')" formaction="products.jsp"><i class="fa fa-plus-square"></i>  Add product</button></form>
 				</div>
 				<div class="action-container">
-					<form class="action" action="addProduct" method="post" id="add" style="display: block;">
+					<form class="action" action="addProduct" method="post" id="add">
 						<div class="product product-details clearfix">
 							<div class="col-md-6">
 								<div id="product-main-view">
@@ -145,7 +141,7 @@
 										<ul class="size-option" id="sizes" style="display: flex; align-items: center;">
 											<label>
 												<input type="text" id="size-value" class="size-input" placeholder="Add size">
-												<input type="text" id="size-values" style="display: none;"  name="talla">
+												<input type="text" id="size-values" value="" style="display: none;" name="talla">
 												<i class="fa fa-plus" onclick="addSize()" style="position: relative; left: -30px; cursor: pointer;"></i>
 											</label>
 											<li style="margin: 0 8px 0 0 !important;"><span class="text-uppercase">Sizes:</span></li>
@@ -163,27 +159,75 @@
 							</div>
 						</div>
 					</form>
-					<div class="action" id="myProducts">
+					<div class="action" id="myProducts" style="display: block;">
 						<div class="row" id="products-container">
-							<c:forEach items="${productos}" var="p">
-							<div class="col-md-4 col-sm-6 col-xs-6">
-								<div class="product product-single">
-									<div class="product-thumb">
-										<form><button class="main-btn quick-view" formaction="product-page.jsp" ><i class="fa fa-search-plus"></i>Quick view</button></form>
-										<img src="data:image/png;base64,${p.getImagen()}" alt="">
+							<div id="viewProducts">
+								<c:forEach items="${productos}" var="p">
+									<div class="col-md-4 col-sm-6 col-xs-6">
+										<div class="product product-single">
+											<div class="product-thumb">
+												<img src="data:image/png;base64,${p.getImagen()}" alt="" id="view-p-image">
+											</div>
+											<div class="product-body">
+												<h3 class="product-price">${p.getPrecio()} &#8364</h3>
+												<h2 class="product-name"><a href="#">${p.getNombreProducto()}</a></h2>
+												<div class="product-btns">
+													<button class="primary-btn add-to-cart" 
+														onclick="modifyProduct('${p.getIdProducto()}','${p.getNombreProducto()}','${p.getMarca()}',
+														'${p.getTalla()}','${p.getPrecio()}','${p.getDescripcionBreve()}','${p.getCantidad()}','${p.getImagen()}')">
+														<i class="fa fa-edit"></i> Modify
+													</button>
+													<form action="deleteProduct" method="post">
+														<input type="text"name="idProducto" value="${p.getIdProducto()}" style="display: none;">
+														<button class="primary-btn add-to-cart" type="submit"><i class="fa fa-trash"></i> Delete</button>
+													</form>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="product-body">
-										<h3 class="product-price">${p.getPrecio()} &#8364</h3>
-										<h2 class="product-name"><a href="#">${p.getNombreProducto()}</a></h2>
-										<div class="product-btns">
-											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-											<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+								</c:forEach>
+							</div>
+							<form action="modifyProduct" method="post" id="modify" style="display: none;">
+								<input type="text" name="idProducto" style="display: none;">
+								<div class="product product-details clearfix">
+									<div class="col-md-6">
+										<div id="product-main-view">
+											<div class="product-view">
+												<img src="./img/default-product.png" id="product-image-modify" onclick="document.getElementById('image-selector-modify').click()" style="cursor: pointer;">
+												<input type="file" id="image-selector-modify" style="display: none">
+												<input type="text" name="imagen" id="submit-image-modify" style="display: none;">
+											</div>
+										</div>
+										<button class="primary-btn" onclick="viewProducts()" type="button"><i class="fa fa-arrow-left"></i> Back</button>
+									</div>
+									<div class="col-md-6">
+										<div class="product-body">
+											<input class="product-name h2" type="text" placeholder="Product name" name="nombreProducto">
+											<input class="product-price h3" type="number" min="1" step="0.01" placeholder="Product price" name="precio">
+											<p><strong>Brand:</strong><input class="brand-input" type="text" placeholder="Type the product brand" name="marca"></p>
+											<textarea class="description" placeholder="Type the description below..." name="desc"></textarea>
+											<div class="product-options">
+												<ul class="size-option" id="sizes-modify" style="display: flex; align-items: center;">
+													<label>
+														<input type="text" id="size-value-modify" class="size-input" placeholder="Add size">
+														<input type="text" id="size-values-modify" value="" style="display: none;" name="talla">
+														<i class="fa fa-plus" onclick="addSizeMod()" style="position: relative; left: -30px; cursor: pointer;"></i>
+													</label>
+													<li style="margin: 0 8px 0 0 !important;"><span class="text-uppercase">Sizes:</span></li>
+												</ul>
+											</div>
+				
+											<div class="product-btns" style="position: relative; display: flex;">
+												<div class="qty-input">
+													<span class="text-uppercase">STOCK: </span>
+													<input class="input" type="number" style="box-shadow: unset !important; background: white;" name="cantidad">
+												</div>
+												<span class="add-btn" onclick="modifyProduct_()">MODIFY</span>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							</c:forEach>
+							</form>
 						</div>
 					</div>
 				</div>

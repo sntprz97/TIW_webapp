@@ -68,7 +68,6 @@ public class GetSellerProducts {
 				rtProductos.close();
 				
 				request.setAttribute("productos", productos);
-				request.getRequestDispatcher("seller.jsp").forward(request, response);
 				
 			// 6.- Close the statement and the connection
 					
@@ -83,6 +82,7 @@ public class GetSellerProducts {
 				System.out.println(errors.toString());
 		}
 		
+		request.getRequestDispatcher("seller.jsp").forward(request, response);
 		return;					
 	}
 

@@ -27,6 +27,8 @@ public class ModifyProduct {
 		String imagenProducto = request.getParameter("imagen");
 		String idProducto = request.getParameter("idProducto");
 		
+		System.out.println(idProducto);
+		
 		byte[] bytes = Base64.getDecoder().decode(imagenProducto);
 		
 		try {
@@ -50,9 +52,12 @@ public class ModifyProduct {
 				st.executeUpdate("UPDATE PRODUCTOS SET precio='"+request.getParameter("precio")+"' WHERE idProducto='"+idProducto+"'");
 				st.executeUpdate("UPDATE PRODUCTOS SET cantidad='"+request.getParameter("cantidad")+"' WHERE idProducto='"+idProducto+"'");
 				
-				PreparedStatement pst = con.prepareStatement("UPDATE PRODUCTOS SET imagen='"+"(?)"+"' WHERE idProducto='"+idProducto+"'");
+				PreparedStatement pst = con.prepareStatement("UPDATE PRODUCTOS SET imagen="+"(?)"+" WHERE idProducto='"+idProducto+"'");
 				pst.setBlob(1, new ByteArrayInputStream(bytes),bytes.length);
 				pst.executeUpdate();
+				
+				GetSellerProducts gsp = new GetSellerProducts();
+				gsp.doGet(request, response);
 				
 				pst.close();
 				st.close();
@@ -65,7 +70,6 @@ public class ModifyProduct {
 			System.out.println(errors.toString());
 		}
 		
-		request.getRequestDispatcher("productos.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
 		return;
 	}
 }

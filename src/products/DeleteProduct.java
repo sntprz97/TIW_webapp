@@ -21,14 +21,14 @@ public class DeleteProduct {
 	DataSource ds;
 	boolean empty=true;
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
 			String id = sesion.getAttribute("Usuario").toString();
-			String pos = sesion.getAttribute("Position").toString();
+			String idProducto = request.getParameter("idProducto");
 			Connection con = null;
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			
@@ -39,15 +39,19 @@ public class DeleteProduct {
 			}else{
 				
 				Statement st = con.createStatement();
-				ResultSet rs= st.executeQuery("SELECT * FROM VENDEDORES WHERE username='"+id+"'");
+				ResultSet rs = st.executeQuery("SELECT * FROM VENDEDORES WHERE username='"+id+"'");
 				
 				while(rs.next()) {
 					if(empty != false) {
-						st.executeUpdate("DELETE FROM PRODUCTOS WHERE idProducto='"+pos+"'");
+						st.executeUpdate("DELETE FROM PRODUCTOS WHERE idProducto='"+idProducto+"'");
 						st.close();
 						con.close();
 						
-						request.getRequestDispatcher("seller.jsp").forward(request, response); //Parche, cambiar en un futuro por "Mis productos"
+						GetSellerProducts gsp = new GetSellerProducts();
+						gsp.doGet(request, response);
+						
+						return;
+						//Parche, cambiar en un futuro por "Mis productos"
 						//De momento no invalido sesión, cuando misproductos esté hecho, al seleccionar sobre un producto se pondrá la pos con el id de ese producto
 					}else {
 						sesion.setAttribute("error", "ProductoExistente");

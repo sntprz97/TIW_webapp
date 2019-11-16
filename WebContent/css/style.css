@@ -476,6 +476,8 @@ textarea.input {
 
 #shopping-cart .shopping-cart-btns>button {
   width: calc(50% - 2px);
+  height:auto;
+  display:inline-block;
 }
 
 /*=========================================================

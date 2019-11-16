@@ -23,7 +23,6 @@ import products.DeleteProduct;
 import products.GetProducts;
 import products.GetSellerProducts;
 import products.ModifyProduct;
-import search.Search;
 import signUp.SignUp;
 
 /**
@@ -74,14 +73,9 @@ public class ControlerServlet extends HttpServlet {
 	    	m.doGet(request, response);	
 	    }
 
-		if (sReq.compareTo("/getProductsPreview")==0){
+		if (sReq.compareTo("/getProducts")==0){
 			GetProducts m = new GetProducts();
 	    	m.doGet(request, response);	
-	    }
-		
-		if (sReq.compareTo("/deleteProduct")==0){
-	    	DeleteProduct d = new DeleteProduct();
-	    	d.doGet(request, response);	
 	    }
 		
 		if (sReq.compareTo("/getSellerProducts")==0){
@@ -124,11 +118,11 @@ public class ControlerServlet extends HttpServlet {
 	    	ModifyProduct m = new ModifyProduct();
 	    	m.doPost(request, response);
 	    }
-
-		if(sReq.compareTo("/search.html")==0) {
-			Search sh= new Search();
-			sh.doPost(request, response);
-		}
+		
+		if (sReq.compareTo("/deleteProduct")==0){
+	    	DeleteProduct d = new DeleteProduct();
+	    	d.doPost(request, response);	
+	    }
 		
 	}
 

@@ -88,11 +88,24 @@ input {
 	border: unset !important;
 }
 
-#product-image {
+#product-image, #product-image-modify {
 	height: 440px;
+    object-fit: cover;
+}
+
+#view-p-image {
+	height: 250px;
     object-fit: cover;
 }
 
 .h2, .h3 {
 	margin: 0 0 8px 0 !important;
+}
+
+.product-btns {
+	display: flex;
+}
+
+.product-btns > * {
+	margin-right: 12px;
 }
