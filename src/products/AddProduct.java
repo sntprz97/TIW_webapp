@@ -37,10 +37,12 @@ public class AddProduct {
 			String precio = request.getParameter("precio");
 			String cantidad = request.getParameter("cantidad");
 			String imagenProducto = request.getParameter("imagen");
-			
+			System.out.println("AQUI TIENES TU BASE 64");
 			System.out.println(imagenProducto);
 			
-			byte[] bytes = Base64.getDecoder().decode(imagenProducto);
+			String base64Image = imagenProducto.substring(imagenProducto.indexOf(',')+1);
+			System.out.println(base64Image);
+			byte[] bytes = Base64.getDecoder().decode(base64Image);
 			
 			String servername = "localhost";
 			HttpSession sesion = request.getSession();
@@ -81,7 +83,7 @@ public class AddProduct {
 			System.out.println(errors.toString());
 		}
 		
-		request.getRequestDispatcher("seller.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
+		request.getRequestDispatcher("products.jsp").forward(request, response);	//Cambiar en un futuro por la pï¿½gina "My products"
 		return;
 	}	
 }

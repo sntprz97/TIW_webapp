@@ -22,12 +22,13 @@ import products.AddProduct;
 import products.DeleteProduct;
 import products.GetProducts;
 import products.ModifyProduct;
+import search.Search;
 import signUp.SignUp;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct"})
+@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProductsPreview", "/addProduct", "/deleteProduct", "/modifyProduct", "/search.html"})
 @MultipartConfig
 public class ControlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +73,7 @@ public class ControlerServlet extends HttpServlet {
 	    	m.doGet(request, response);	
 	    }
 
-		if (sReq.compareTo("/getProducts")==0){
+		if (sReq.compareTo("/getProductsPreview")==0){
 			GetProducts m = new GetProducts();
 	    	m.doGet(request, response);	
 	    }
@@ -117,6 +118,11 @@ public class ControlerServlet extends HttpServlet {
 	    	ModifyProduct m = new ModifyProduct();
 	    	m.doPost(request, response);
 	    }
+
+		if(sReq.compareTo("/search.html")==0) {
+			Search sh= new Search();
+			sh.doPost(request, response);
+		}
 		
 	}
 
