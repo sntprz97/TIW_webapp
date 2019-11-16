@@ -66,7 +66,14 @@ public class AddProduct {
 					PreparedStatement pst = con.prepareStatement("INSERT INTO `PRODUCTOS` VALUES ('"+pos+"', '"+nombreProducto+"', '"+marca+"', '"+talla+"', '"+descripcion+"', '"+precio+"', '" + cantidad +"', '"+id+"', (?));");
 					pst.setBlob(1, new ByteArrayInputStream(bytes),bytes.length);
 					pst.executeUpdate();
-					sesion.setAttribute("Position", pos);
+					request.getSession().setAttribute("Position", pos);
+					request.getSession().setAttribute("NombreProducto", nombreProducto);
+					request.getSession().setAttribute("Marca", marca);
+					request.getSession().setAttribute("Talla", talla);
+					request.getSession().setAttribute("Descripcion", descripcion);
+					request.getSession().setAttribute("Precio", precio);
+					request.getSession().setAttribute("Cantidad", cantidad);
+					request.getSession().setAttribute("ImagenProducto", imagenProducto);
 					
 					st.close();
 					con.close();
@@ -81,7 +88,7 @@ public class AddProduct {
 			System.out.println(errors.toString());
 		}
 		
-		request.getRequestDispatcher("seller.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
+		request.getRequestDispatcher("products.jsp").forward(request, response);	//Cambiar en un futuro por la página "My products"
 		return;
 	}	
 }
