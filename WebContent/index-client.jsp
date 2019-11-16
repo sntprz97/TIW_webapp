@@ -742,7 +742,7 @@
 							<div class="col-md-4 col-sm-6 col-xs-6">
 								<div class="product product-single">
 									<div class="product-thumb">
-										<form><button class="main-btn quick-view" formaction="product-page.jsp" ><i class="fa fa-search-plus"></i>Quick view</button></form>
+										<button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
 										<img src="data:image/png;base64,${p.getImagen()}" alt="">
 									</div>
 									<div class="product-body">

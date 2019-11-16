@@ -17,7 +17,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class GetSellerProducts {
@@ -32,8 +31,6 @@ public class GetSellerProducts {
 
 			String servername = "localhost";
 			Connection con = null;
-			HttpSession sesion = request.getSession();
-			String id = sesion.getAttribute("Usuario").toString();
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/usersdb?autoReconnect=true&useSSL=false", "root", "root");
 			
 			if (con==null){
@@ -46,34 +43,35 @@ public class GetSellerProducts {
 				
 			// 4.- Execute the query "select * from users" 
 				
-				ResultSet rtProductos = st.executeQuery("SELECT * FROM PRODUCTOS WHERE idUsuario='"+id+"'");
-				ArrayList<Producto> productos = new ArrayList<>();
+				ResultSet rs = st.executeQuery("select * from PRODUCTOS");
 				
-				while(rtProductos.next()) {
-					Blob blob = rtProductos.getBlob("imagen");
+				ArrayList<HashMap<String, String>> productos = new ArrayList<>();
+				while(rs.next()) {
+					Blob blob = rs.getBlob("imagen");
 					byte [] bytes = blob.getBytes(1l, (int)blob.length());
 					String image = Base64.getEncoder().encodeToString(bytes);
-					productos.add(new Producto(
-							rtProductos.getString("idProducto"), 
-							rtProductos.getString("nombreProducto"), 
-							rtProductos.getString("marca"), 
-							rtProductos.getString("talla"), 
-							rtProductos.getString("descripcionBreve"), 
-							rtProductos.getFloat("precio"), 
-							rtProductos.getInt("cantidad"), 
-							rtProductos.getString("idUsuario"), 
-							image));
+					
+					productos.add(new HashMap<String, String>(){{
+						put("\"nombreProducto\"", "\"" + rs.getString("nombreProducto") + "\"");
+						put("\"precio\"", "\"" + rs.getString("precio") + "\"");
+						put("\"imagen\"", "\"" + image + "\"");
+					}});
 				}
 				
-				rtProductos.close();
+				String res = productos.toString();
+				res = res.replace('=',':');
 				
-				request.setAttribute("productos", productos);
-				request.getRequestDispatcher("seller.jsp").forward(request, response);
+				rs.close();
 				
 			// 6.- Close the statement and the connection
 					
 				st.close();
 				con.close();
+				
+		        PrintWriter out = response.getWriter();
+		        response.setCharacterEncoding("UTF-8");
+		        out.print(res);
+		        out.flush(); 
 		        
 			}
 			
