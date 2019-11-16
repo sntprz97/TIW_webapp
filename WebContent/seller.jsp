@@ -74,7 +74,7 @@
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="index.jsp">
+						<a class="logo" href="products.jsp">
 							<img src="./img/logo.png" alt="">
 						</a>
 					</div>
@@ -117,11 +117,11 @@
 	<!-- /HEADER -->
 	<img class="dashboard" src="./img/dashboard.png" alt="">
 	<div id="fh5co-tours" class="fh5co-section-gray">
-			<div class="container"> 
-				<div class="row">
-					<button class="primary-btn action-btn active" id="add-button" onclick="changeTab('add')"><i class="fa fa-plus-square"></i>  Add product</button>
-					<button class="primary-btn action-btn " id="edit-button" onclick="changeTab('edit')"><i class="fa fa-edit"></i>  Edit product</button>
-					<button class="primary-btn action-btn " id="remove-button" onclick="changeTab('remove')"><i class="fa fa-trash"></i>  Remove product</button>
+		<div class="container"> 
+			<div class="row">
+				<div>
+					<button class="primary-btn action-btn active" id="add-button" onclick="changeTab('add')" formaction="products.jsp"><i class="fa fa-plus-square"></i>  Add product</button></form>
+					<button class="primary-btn action-btn " id="myProducts-button" onclick="changeTab('myProducts')"><i class="fa fa-book"></i>  View your products</button>
 				</div>
 				<div class="action-container">
 					<form class="action" action="addProduct" method="post" id="add" style="display: block;">
@@ -163,13 +163,30 @@
 							</div>
 						</div>
 					</form>
-					<div class="action" id="edit">
-						EDIT
+					<div class="action" id="myProducts">
+						<div class="row" id="products-container">
+							<c:forEach items="${productos}" var="p">
+							<div class="col-md-4 col-sm-6 col-xs-6">
+								<div class="product product-single">
+									<div class="product-thumb">
+										<form><button class="main-btn quick-view" formaction="product-page.jsp" ><i class="fa fa-search-plus"></i>Quick view</button></form>
+										<img src="data:image/png;base64,${p.getImagen()}" alt="">
+									</div>
+									<div class="product-body">
+										<h3 class="product-price">${p.getPrecio()} &#8364</h3>
+										<h2 class="product-name"><a href="#">${p.getNombreProducto()}</a></h2>
+										<div class="product-btns">
+											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+											<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							</c:forEach>
+						</div>
 					</div>
-					<div class="action" id="remove">
-						REMOVE
-					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 		<!-- jQuery Plugins -->

@@ -1,16 +1,16 @@
 <%@ page import="java.text.*,java.util.*"%>
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ page contentType="text/html"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>TIW SHOP</title>
+	<title>E-SHOP HTML Template</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -37,8 +37,10 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
+
 </head>
-<body onload="getProducts()">
+
+<body>
 	<!-- HEADER -->
 	<header>
 		<!-- top Header -->
@@ -65,7 +67,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">USD ($)</a></li>
-								<li><a href="#">EUR (â¬)</a></li>
+								<li><a href="#">EUR (€)</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -80,7 +82,7 @@
 				<div class="pull-left">
 					<!-- Logo -->
 					<div class="header-logo">
-						<a class="logo" href="products.jsp">
+						<a class="logo" href="index.jsp">
 							<img src="./img/logo.png" alt="">
 						</a>
 					</div>
@@ -108,16 +110,16 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">WELCOME<i class="fa fa-caret-down"></i></strong>
+								<strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase"><%= session.getAttribute("Usuario") %></a>
+							<a href="login.jsp" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Join</a>
 							<ul class="custom-menu">
-								<li><a href="getSellerProducts"><i class="fa fa-user-o"></i> My Products</a></li>
+								<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-								<li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
-								<li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
+								<li><a href="checkout.html"><i class="fa fa-check"></i> Checkout</a></li>
+								<li><a href="login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
+								<li><a href="signUp.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
 							</ul>
 						</li>
 						<!-- /Account -->
@@ -159,7 +161,7 @@
 									</div>
 									<div class="shopping-cart-btns">
 										<button class="main-btn">View Cart</button>
-										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										<a  href="checkout.html"><button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button></a>
 									</div>
 								</div>
 							</div>
@@ -190,15 +192,15 @@
 					<span class="category-header">Categories <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Womenâs Clothing <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women’s Clothing <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
 									<div class="col-md-4">
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -209,8 +211,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -221,8 +223,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -243,7 +245,7 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="#">Menâs Clothing</a></li>
+						<li><a href="#">Men’s Clothing</a></li>
 						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Phones & Accessories <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
@@ -251,8 +253,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -261,8 +263,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -273,8 +275,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -283,8 +285,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -311,8 +313,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -321,8 +323,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -333,8 +335,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -343,8 +345,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -355,8 +357,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -365,8 +367,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -394,8 +396,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -406,8 +408,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -418,8 +420,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -448,7 +450,7 @@
 											<a class="banner banner-1" href="#">
 												<img src="./img/banner06.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Womenâs</h3>
+													<h3 class="white-color text-uppercase">Women’s</h3>
 												</div>
 											</a>
 											<hr>
@@ -456,8 +458,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -468,7 +470,7 @@
 											<a class="banner banner-1" href="#">
 												<img src="./img/banner07.jpg" alt="">
 												<div class="banner-caption text-center">
-													<h3 class="white-color text-uppercase">Menâs</h3>
+													<h3 class="white-color text-uppercase">Men’s</h3>
 												</div>
 											</a>
 										</div>
@@ -476,8 +478,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -496,8 +498,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -516,8 +518,8 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Womenâs Clothing</a></li>
-											<li><a href="#">Menâs Clothing</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
 											<li><a href="#">Phones & Accessories</a></li>
 											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
@@ -548,8 +550,10 @@
 	<div id="breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb">
-				<li><a href="index.jsp">Home</a></li>
-				<li class="active">Products</li>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Products</a></li>
+				<li><a href="#">Category</a></li>
+				<li class="active">Product Name Goes Here</li>
 			</ul>
 		</div>
 	</div>
@@ -561,214 +565,75 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<!-- ASIDE -->
-				<div id="aside" class="col-md-3">
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Shop by:</h3>
-						<ul class="filter-list">
-							<li><span class="text-uppercase">color:</span></li>
-							<li><a href="#" style="color:#FFF; background-color:#8A2454;">Camelot</a></li>
-							<li><a href="#" style="color:#FFF; background-color:#475984;">East Bay</a></li>
-							<li><a href="#" style="color:#FFF; background-color:#BF6989;">Tapestry</a></li>
-							<li><a href="#" style="color:#FFF; background-color:#9A54D8;">Medium Purple</a></li>
-						</ul>
-
-						<ul class="filter-list">
-							<li><span class="text-uppercase">Size:</span></li>
-							<li><a href="#">X</a></li>
-							<li><a href="#">XL</a></li>
-						</ul>
-
-						<ul class="filter-list">
-							<li><span class="text-uppercase">Price:</span></li>
-							<li><a href="#">MIN: $20.00</a></li>
-							<li><a href="#">MAX: $120.00</a></li>
-						</ul>
-
-						<ul class="filter-list">
-							<li><span class="text-uppercase">Gender:</span></li>
-							<li><a href="#">Men</a></li>
-						</ul>
-
-						<button class="primary-btn">Clear All</button>
-					</div>
-					<!-- /aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Filter by Price</h3>
-						<div id="price-slider"></div>
-					</div>
-					<!-- aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Filter By Color:</h3>
-						<ul class="color-option">
-							<li><a href="#" style="background-color:#475984;"></a></li>
-							<li><a href="#" style="background-color:#8A2454;"></a></li>
-							<li class="active"><a href="#" style="background-color:#BF6989;"></a></li>
-							<li><a href="#" style="background-color:#9A54D8;"></a></li>
-							<li><a href="#" style="background-color:#675F52;"></a></li>
-							<li><a href="#" style="background-color:#050505;"></a></li>
-							<li><a href="#" style="background-color:#D5B47B;"></a></li>
-						</ul>
-					</div>
-					<!-- /aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Filter By Size:</h3>
-						<ul class="size-option">
-							<li class="active"><a href="#">S</a></li>
-							<li class="active"><a href="#">XL</a></li>
-							<li><a href="#">SL</a></li>
-						</ul>
-					</div>
-					<!-- /aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Filter by Brand</h3>
-						<ul class="list-links">
-							<li><a href="#">Nike</a></li>
-							<li><a href="#">Adidas</a></li>
-							<li><a href="#">Polo</a></li>
-							<li><a href="#">Lacost</a></li>
-						</ul>
-					</div>
-					<!-- /aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Filter by Gender</h3>
-						<ul class="list-links">
-							<li class="active"><a href="#">Men</a></li>
-							<li><a href="#">Women</a></li>
-						</ul>
-					</div>
-					<!-- /aside widget -->
-
-					<!-- aside widget -->
-					<div class="aside">
-						<h3 class="aside-title">Top Rated Product</h3>
-						<!-- widget product -->
-						<div class="product product-widget">
-							<div class="product-thumb">
+				<!--  Product Details -->
+				<div class="product product-details clearfix">
+					<div class="col-md-6">
+						<div id="product-main-view">
+							<div class="product-view">
+								<img src="./img/main-product01.jpg" alt="">
+							</div>
+							<div class="product-view">
+								<img src="./img/main-product02.jpg" alt="">
+							</div>
+							<div class="product-view">
+								<img src="./img/main-product03.jpg" alt="">
+							</div>
+							<div class="product-view">
+								<img src="./img/main-product04.jpg" alt="">
+							</div>
+						</div>
+						<div id="product-view">
+							<div class="product-view">
 								<img src="./img/thumb-product01.jpg" alt="">
 							</div>
-							<div class="product-body">
-								<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-								<h3 class="product-price">$32.50 <del class="product-old-price">$45.00</del></h3>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o empty"></i>
-								</div>
+							<div class="product-view">
+								<img src="./img/thumb-product02.jpg" alt="">
+							</div>
+							<div class="product-view">
+								<img src="./img/thumb-product03.jpg" alt="">
+							</div>
+							<div class="product-view">
+								<img src="./img/thumb-product04.jpg" alt="">
 							</div>
 						</div>
-						<!-- /widget product -->
-
-						<!-- widget product -->
-						<div class="product product-widget">
-							<div class="product-thumb">
-								<img src="./img/thumb-product01.jpg" alt="">
-							</div>
-							<div class="product-body">
-								<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-								<h3 class="product-price">$32.50</h3>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o empty"></i>
-								</div>
-							</div>
-						</div>
-						<!-- /widget product -->
 					</div>
-					<!-- /aside widget -->
+					<div class="col-md-6">
+						<div class="product-body">
+							<h2 class="product-name"><% request.getSession().getAttribute("NombreProducto"); %></h2>
+							<h3 class="product-price"><% request.getSession().getAttribute("Precio"); %></h3>
+							<p><strong>Availability:</strong> <% if(request.getSession().getAttribute("Cantidad") != null){ %><strong>In stock</strong> <%}else{%><strong>Product not available</strong><%}%></p>
+							<p><strong>Brand:</strong> <% request.getSession().getAttribute("Marca"); %></p>
+							<p><% request.getSession().getAttribute("Descripcion"); %></p>
+							<div class="product-options">
+								<ul class="size-option">
+									<li><span class="text-uppercase">Size:</span></li>
+									<li class="active"><a href="#"><% request.getSession().getAttribute("Talla"); %></a></li>
+									<li><a href="#">XL</a></li>
+									<li><a href="#">SL</a></li>
+								</ul>
+							</div>
+							<div class="product-btns">
+								<div class="qty-input">
+									<span class="text-uppercase">QTY: </span>
+									<input class="input" type="number">
+								</div>
+								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+								<div class="pull-right">
+									<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+									<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+									<button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<!-- /ASIDE -->
-
-				<!-- MAIN -->
-				<div id="main" class="col-md-9">
-					<!-- store top filter -->
-					<div class="store-filter clearfix">
-						<div class="pull-left">
-							<div class="row-filter">
-								<a href="#"><i class="fa fa-th-large"></i></a>
-								<a href="#" class="active"><i class="fa fa-bars"></i></a>
-							</div>
-							<div class="sort-filter">
-								<span class="text-uppercase">Sort By:</span>
-								<select class="input">
-										<option value="0">Position</option>
-										<option value="0">Price</option>
-										<option value="0">Rating</option>
-									</select>
-								<a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
-							</div>
-						</div>
-						<div class="pull-right">
-							<div class="page-filter">
-								<span class="text-uppercase">Show:</span>
-								<select class="input">
-										<option value="0">10</option>
-										<option value="1">20</option>
-										<option value="2">30</option>
-									</select>
-							</div>
-							<ul class="store-pages">
-								<li><span class="text-uppercase">Page:</span></li>
-								<li class="active">1</li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- /store top filter -->
-
-					<!-- STORE -->
-					<div id="store">
-						<!-- row -->
-						<div class="row" id="products-container">
-							<c:forEach items="${productos}" var="p">
-							<div class="col-md-4 col-sm-6 col-xs-6">
-								<div class="product product-single">
-									<div class="product-thumb">
-										<form><button class="main-btn quick-view" formaction="product-page.jsp" ><i class="fa fa-search-plus"></i>Quick view</button></form>
-										<img src="data:image/png;base64,${p.getImagen()}" alt="">
-									</div>
-									<div class="product-body">
-										<h3 class="product-price">${p.getPrecio()} &#8364</h3>
-										<h2 class="product-name"><a href="#">${p.getNombreProducto()}</a></h2>
-										<div class="product-btns">
-											<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-											<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-											<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							</c:forEach>
-						</div>
-					</div>
-					<!-- /store bottom filter -->
-				</div>
-				<!-- /MAIN -->
+				<!-- /Product Details -->
 			</div>
 			<!-- /row -->
 		</div>
 		<!-- /container -->
 	</div>
 	<!-- /section -->
-
 	<!-- FOOTER -->
 	<footer id="footer" class="section section-grey">
 		<!-- container -->
@@ -873,8 +738,8 @@
 	<script src="js/slick.min.js"></script>
 	<script src="js/nouislider.min.js"></script>
 	<script src="js/jquery.zoom.min.js"></script>
-	<script src="js/products.js"></script>
 	<script src="js/main.js"></script>
 
 </body>
+
 </html>
