@@ -28,16 +28,16 @@ import signUp.SignUp;
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControlerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct", "/getSellerProducts"})
+@WebServlet({"/ControllerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct", "/getSellerProducts"})
 @MultipartConfig
-public class ControlerServlet extends HttpServlet {
+public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Resource (name="TIWDS") //Using Inyection
 	DataSource ds;   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ControlerServlet() {
+    public ControllerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

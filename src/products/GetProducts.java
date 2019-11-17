@@ -24,8 +24,11 @@ public class GetProducts {
 	@Resource (name = "TIWDS") //Using Inyection
 	DataSource ds;
 	boolean empty = true;
+	String userSearch = "";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		userSearch = request.getParameter("userSearch");
 		
 		try {
 
@@ -43,8 +46,13 @@ public class GetProducts {
 				
 			// 4.- Execute the query "select * from users" 
 				
-
-				ResultSet rtProductos = st.executeQuery("select * from PRODUCTOS");
+				ResultSet rtProductos;
+				if(userSearch != "") {
+					rtProductos = st.executeQuery("select * from PRODUCTOS where nombreProducto LIKE '%"+userSearch+"%' OR nombreProducto LIKE '%"+userSearch+"%'");
+				} else {
+					rtProductos = st.executeQuery("select * from PRODUCTOS");
+				}
+				
 				ArrayList<Producto> productos = new ArrayList<>();
 				
 				while(rtProductos.next()) {
