@@ -83,6 +83,7 @@ public class Login {
 					empty = false;
 					if(rtVendedor.first()!=false) {
 						sesion.setAttribute("Usuario", rtVendedor.getString("username"));
+						sesion.setAttribute("Status","seller");
 						sesion.setAttribute("error", null);
 						request.setAttribute("productos", productos);
 						request.getRequestDispatcher("products.jsp").forward(request, response);
@@ -101,6 +102,7 @@ public class Login {
 						if(rtUsuario.getString("contrasena").compareTo(contrasena)==0){
 					    	sesion.setAttribute("Usuario", rtUsuario.getString("email"));
 					    	sesion.setAttribute("NombreUsuario", rtUsuario.getString("nombre"));
+					    	sesion.setAttribute("Status","buyer");
 					    	sesion.setAttribute("error", null);
 					    	request.setAttribute("productos", productos);
 					    	request.getRequestDispatcher("index-client.jsp").forward(request, response);

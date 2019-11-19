@@ -114,7 +114,7 @@
 							<ul class="custom-menu">
 								<li><a href="getSellerProducts"><i class="fa fa-user-o"></i> My Products</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+								<li><a href="misMensajes.html"><i class="fa fa-exchange"></i> Mensajes</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
 								<li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>

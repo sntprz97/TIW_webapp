@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.naming.NamingException;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,9 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import cerrarSesion.CerrarSesion;
+import checkout.Checkout;
 import login.Login;
 import perfil.BorrarCuenta;
 import perfil.CambiarPerfil;
@@ -24,11 +27,15 @@ import products.GetProducts;
 import products.GetSellerProducts;
 import products.ModifyProduct;
 import signUp.SignUp;
+import messageJMS.SendMessage;
+import messageJMS.BroadcastMessage;
+import messageJMS.ConsumeMessage;
+import messageJMS.ReceiveMessage;
 
 /**
  * Servlet implementation class ControlerServlet
  */
-@WebServlet({"/ControllerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct", "/getSellerProducts"})
+@WebServlet({"/ControllerServlet", "/signUp.html", "/login.html", "/cerrarSesion.html", "/profile.html", "/borrarCuenta.html", "/cambiarPerfil.html", "/checkout.html", "/getProducts", "/addProduct", "/deleteProduct", "/modifyProduct", "/getSellerProducts", "/misMensajes.html", "/enviarMensaje.html"})
 @MultipartConfig
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -72,7 +79,16 @@ public class ControllerServlet extends HttpServlet {
 	    	BorrarCuenta m = new BorrarCuenta();
 	    	m.doGet(request, response);	
 	    }
-
+		
+		if (sReq.compareTo("/misMensajes.html")==0){
+	    	ReceiveMessage rm = new ReceiveMessage();
+	    	try {
+	    		rm.doGet(request, response);
+	    	} catch(NamingException e) {
+	    		e.printStackTrace();
+	    	}  		
+	    }
+		
 		if (sReq.compareTo("/getProducts")==0){
 			GetProducts m = new GetProducts();
 	    	m.doGet(request, response);	
@@ -121,6 +137,31 @@ public class ControllerServlet extends HttpServlet {
 		
 		if (sReq.compareTo("/deleteProduct")==0){
 	    	DeleteProduct d = new DeleteProduct();
+	    	d.doPost(request, response);	
+	    }
+		
+		if (sReq.compareTo("/enviarMensaje.html")==0){
+			HttpSession sesion = request.getSession();
+			String status = sesion.getAttribute("Status").toString();
+			if(status == "buyer") {
+				SendMessage sm = new SendMessage();
+				try {
+		    		sm.doPost(request, response);
+		    	} catch(NamingException e) {
+		    		e.printStackTrace();
+		    	} 
+			} else {
+				BroadcastMessage pm = new BroadcastMessage();
+				try {
+		    		pm.doPost(request, response);
+		    	} catch(NamingException e) {
+		    		e.printStackTrace();
+		    	} 
+			} 		
+	    }
+		
+		if (sReq.compareTo("/checkout.html")==0){
+	    	Checkout d = new Checkout();
 	    	d.doPost(request, response);	
 	    }
 		

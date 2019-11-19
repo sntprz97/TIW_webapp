@@ -114,7 +114,7 @@
 							<ul class="custom-menu">
 								<li><a href="profile.html"><i class="fa fa-user-o"></i> My Account</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-								<li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+								<li><a href="misMensajes.html"><i class="fa fa-exchange"></i> Mensajes</a></li>
 								<li><a href="checkout.html"><i class="fa fa-check"></i> Checkout</a></li>
 								<li><a href="login.jsp"><i class="fa fa-unlock-alt"></i> Login</a></li>
 								<li><a href="signUp.jsp"><i class="fa fa-user-plus"></i> Create An Account</a></li>
@@ -159,7 +159,9 @@
 									</div>
 									<div class="shopping-cart-btns">
 										<button class="main-btn">View Cart</button>
-										<button class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										<form action="checkout.html" method="post">
+											<button type="submit" class="primary-btn">Checkout <i class="fa fa-arrow-circle-right"></i></button>
+										</form>
 									</div>
 								</div>
 							</div>
